@@ -21,7 +21,7 @@ public class AnswerController {
 	private final AnswerService answerService;
 	
 	@PostMapping("/create/{id}")
-	public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam(value="content") String content) {
+	public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult) {
 		Question question = this.questionService.getQuestion(id);
 		this.answerService.create(question, content);
 		return String.format("redirect:/question/detail/%s", id);
